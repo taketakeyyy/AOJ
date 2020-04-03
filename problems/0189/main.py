@@ -14,21 +14,32 @@ class WarshallFloyd():
         self._dist = [[float("inf") for _ in range(v)] for __ in range(v)]  # 隣接行列dist[i][j] := iからjへ行くまでのコスト
         for i in range(v):
             self._dist[i][i] = 0
-        self.V = v
+        self.v = v
 
     @property
     def dist(self):
+        """隣接行列を返す"""
         return self._dist
 
+    @property
+    def V(self):
+        """頂点数を返す"""
+        return self.v
+
     def update(self, a, b, cost):
-        """隣接行列のコストを更新する"""
+        """隣接行列のコストを更新する
+        Args:
+            a(int): a地点から
+            b(int): b地点までの
+            cost(int): コストをcostに更新する
+        """
         self._dist[a][b] = cost
 
     def shortest_path(self):
         """最短経路を計算する"""
-        for k in range(self.V):
-            for i in range(self.V):
-                for j in range(self.V):
+        for k in range(self.v):
+            for i in range(self.v):
+                for j in range(self.v):
                     self._dist[i][j] = min(self._dist[i][j], self._dist[i][k]+self._dist[k][j])
 
 
@@ -62,6 +73,9 @@ def solve():
             ans_id, ans_cost = i, total_cost
         elif total_cost == ans_cost:
             ans_id = min(ans_id, i)
+
+    if ans_id == float("inf"):
+        return
 
     print(ans_id, ans_cost)
 
