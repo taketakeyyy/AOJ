@@ -8,9 +8,10 @@
 using namespace std;
 
 
-int partition(vector<pair<char,int>>& A, int l, int r, int pivot) {
+int partition(vector<pair<char,int>>& A, int l, int r) {
     // 配列A[l..r]を、pivot以下の配列A[l..q]と、pivotより大きい配列A[q+1..r]に分割する
     // pivotのインデックスを返す
+    int pivot = A[r].second;
     int i = l;
     for(int j=l; j<=r; j++) {
         if (A[j].second <= pivot) {
@@ -23,7 +24,7 @@ int partition(vector<pair<char,int>>& A, int l, int r, int pivot) {
 
 void quick_sort(vector<pair<char, int>>& A, int l, int r) {
     if (l < r) {
-        int q = partition(A, l, r, A[r].second);
+        int q = partition(A, l, r);
         quick_sort(A, l, q-1);
         quick_sort(A, q+1, r);
     }
