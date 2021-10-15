@@ -16,6 +16,7 @@ void chmin(int& x, int y) { x = min(x,y); }
 // 最長増加部分列(LIS)
 ll LIS(const vector<ll> &A) {
     ll N = (ll)A.size();
+    // dp[i] := 増加部分列の長さがiのときの、数列の最終要素の最小値
     vector<ll> dp(N, INF);
     for(ll i=0; i<N; i++) {
         auto it = lower_bound(dp.begin(), dp.end(), A[i]);
